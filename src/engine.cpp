@@ -92,7 +92,7 @@ void Engine::run () {
   database->loadDb();
   database->loadPlatforms();
   std::string message = "Enter\n0) to quit\n1) to display all entries in the DB\n";
-  message += "2) to update an entry\n3) to delete an entry\n";
+  message += "2) to update an entry\n3) to delete an entry\n4) to save current progress\n";
   message += "or type in the name of the company to search for:\n--> ";
   while (running) {
     std::string action = utility->prompt(message);
@@ -105,6 +105,8 @@ void Engine::run () {
       updateEntry();
     } else if(action=="3") {
       deleteEntry();
+    } else if(action=="4") {
+      database->saveProgress();
     } else {
       const Company* company = database->lookup(action);
       if(company==nullptr) {

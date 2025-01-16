@@ -53,6 +53,7 @@ void Database::saveProgress() {
         ofs << company->printAsCsv() << '\n';
       }
       ofs.close();
+      std::cout<<"Done!\n";
     }
   }
 }
