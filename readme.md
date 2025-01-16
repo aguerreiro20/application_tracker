@@ -1,4 +1,4 @@
-# Application tracker CLI (written in C++)
+# Application tracker (written in C++)
 
 Hi there !
 Thank you for your interest the project !
