@@ -84,13 +84,34 @@ void Engine::deleteEntry() {
       std::cout<<"Returning to main menu.\n";
     }
   }
-   
+}
+
+void Engine::lookupEntry(std::string& companyName) {
+      const Company* company = database->lookup(companyName);
+      if(company==nullptr) {
+        std::string response = utility->prompt("Company not found, save it ? (y/n)\n");
+        if(response == "y") {
+          const std::string* platform = promptPlatform();
+          std::cout<<"Saving '"<<companyName<<"' from platform '"<< *platform <<"' ...\n";
+          database->saveCompany(companyName, platform, utility->createTodaysDate());
+        }
+      } else {
+        std::cout<<"Company found ! Details: \n ==> "<<company<<"\n";
+      }
+}
+
+void Engine::init() {
+  database->loadDb();
+  database->loadPlatforms();
+}
+
+void Engine::saveProgress() {
+      database->saveProgress();
 }
 
 void Engine::run () {
   bool running = true;
-  database->loadDb();
-  database->loadPlatforms();
+  init();
   std::string message = "Enter\n0) to quit\n1) to display all entries in the DB\n";
   message += "2) to update an entry\n3) to delete an entry\n4) to save current progress\n";
   message += "or type in the name of the company to search for:\n--> ";
@@ -98,7 +119,7 @@ void Engine::run () {
     std::string action = utility->prompt(message);
     if(action=="0"){
       running = false;
-      database->saveProgress();
+      saveProgress();
     } else if(action=="1") {
       displayDb();
     } else if(action=="2") {
@@ -106,19 +127,9 @@ void Engine::run () {
     } else if(action=="3") {
       deleteEntry();
     } else if(action=="4") {
-      database->saveProgress();
+      saveProgress();
     } else {
-      const Company* company = database->lookup(action);
-      if(company==nullptr) {
-        std::string response = utility->prompt("Company not found, save it ? (y/n)\n");
-        if(response == "y") {
-          const std::string* platform = promptPlatform();
-          std::cout<<"Saving '"<<action<<"' from platform '"<< *platform <<"' ...\n";
-          database->saveCompany(action, platform, utility->createTodaysDate());
-        }
-      } else {
-        std::cout<<"Company found ! Details: \n ==> "<<company<<"\n";
-      }
+      lookupEntry(action);
     }
   }
 }

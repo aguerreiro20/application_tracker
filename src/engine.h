@@ -18,7 +18,10 @@ class Engine {
   public:
     Engine();
     ~Engine();
+    void init();
     void run();
+    void lookupEntry(std::string& name);
+    void saveProgress();
 
 };
 
