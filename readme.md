@@ -15,13 +15,13 @@ If you encounter issues on a Windows system and would like them fixed, feel free
 For Mac you'll have to offer me one :)
 
 ### B. Compile and run
-- Simply run the compile script present in the project `./compile.sh`
+- Simply run the compile script present in the project `./scripts/compile.sh`
 - Run the program `./prog`
-- After adding a few applications **and** exiting the CLI, the current progress is then saved and can be viewed via `./showDb.sh`
+- After adding a few applications **and** exiting the CLI, the current progress is then saved and can be viewed via `./scripts/showDb.sh`
 
 ## III. How it works overall
 ### A) Intent and companies
-The point of the project is to 
+The point of the project is toscripts/ 
 - add new companies/applications as jobs are being applied for in real time (saved in **applications.db** btw)
 - check later if a given company is already listed (in order to not apply for the same)
 
