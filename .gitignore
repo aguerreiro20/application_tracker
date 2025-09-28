@@ -1,3 +1,6 @@
 todo.txt
 *.db
 prog
+old_versions
+applications.db
+platforms.db
